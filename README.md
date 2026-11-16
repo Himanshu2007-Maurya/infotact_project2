@@ -71,3 +71,38 @@ Today's work focused on building the initial TerraSpectra dashboard structure us
 Develop overview dashboard cards and summary components on Day 4.
 
 **Note:** The current dashboard is a frontend UI prototype. Live crop monitoring data, disease predictions, and GIS visualizations will be integrated in upcoming tasks.
+
+### Day 2 – Dashboard Research, Wireframe and UI Design
+**Scheduled Date:** 14 November 2026  
+**Documentation completed:** 16 November 2026
+
+**Dashboard Reference Research:**
+- Reviewed agriculture monitoring dashboard layouts.
+- Studied sidebar-based navigation and crop monitoring interfaces.
+- Reviewed map-centric farm monitoring and analytics layouts.
+- Identified the importance of clear data visualization and separated dashboard modules.
+
+**Reference Sources:**
+- Remote Monitoring Digital Dashboard – https://ausveg.com.au/app/uploads/2024/11/st19024-final-report.pdf
+- Crop Health Monitoring Portal – https://eprints.whiterose.ac.uk/id/eprint/152109/1/sensors-19-03796.pdf
+- Fieldwise Agriculture UX – https://www.tanguyd.com/prjt-fieldwise
+
+**TerraSpectra Wireframe Planning:**
+1. Left sidebar with project branding and navigation.
+2. Top header with breadcrumb, page title and prototype status.
+3. Welcome section describing hyperspectral crop intelligence.
+4. Main workspace for dashboard modules.
+5. Future sections for crop monitoring, GIS maps and analytics.
+
+**Visual Design Decisions:**
+- Dark green sidebar for agricultural identity.
+- Light background for readable content.
+- Green accent colors for active navigation and status indicators.
+- Card-based layout for modular dashboard development.
+- Responsive CSS for smaller screens.
+
+**Technology:** React, Vite, JavaScript and CSS.
+
+**Outcome:** Dashboard research, initial wireframe structure and visual design decisions documented. The initial UI structure was implemented during Day 3.
+
+**Note:** GIS maps, heatmaps, charts and live crop predictions are planned for upcoming development tasks. No live prediction data is claimed at this stage.
