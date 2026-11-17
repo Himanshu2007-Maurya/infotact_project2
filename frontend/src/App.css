@@ -265,3 +265,19 @@ footer {
     font-size: 23px;
   }
 }
+
+.healthy-fill {
+  width: 67%;
+  background: #58b77a;
+}
+
+.moderate-fill {
+  width: 14%;
+  background: #e7b45d;
+}
+
+.high-fill {
+  width: 19%;
+  background: #df7770;
+}
+
