@@ -1,4 +1,5 @@
-﻿import { useState } from "react";
+﻿
+import { useState } from "react";
 import "./App.css";
 
 function App() {
@@ -9,6 +10,37 @@ function App() {
     "Crop Monitoring",
     "Analytics",
     "Reports",
+  ];
+
+  const summaryCards = [
+    {
+      title: "Total Farms",
+      value: "128",
+      change: "Demo farm records",
+      icon: "🌾",
+      color: "green",
+    },
+    {
+      title: "Healthy Crops",
+      value: "86",
+      change: "67.2% of monitored farms",
+      icon: "🌱",
+      color: "blue",
+    },
+    {
+      title: "At-Risk Areas",
+      value: "24",
+      change: "Requires further monitoring",
+      icon: "⚠️",
+      color: "orange",
+    },
+    {
+      title: "Average Crop Health",
+      value: "78.5%",
+      change: "Sample health indicator",
+      icon: "📊",
+      color: "purple",
+    },
   ];
 
   return (
@@ -66,25 +98,103 @@ function App() {
           </p>
         </section>
 
-        <section className="workspace-card">
-          <div className="card-heading">
-            <div>
-              <span className="section-tag">PROJECT WORKSPACE</span>
-              <h3>{activePage}</h3>
-            </div>
-            <span className="prototype-tag">UI Prototype</span>
-          </div>
+        {activePage === "Overview" ? (
+          <>
+            <section className="summary-section">
+              <div className="summary-heading">
+                <div>
+                  <span className="section-tag">FARM OVERVIEW</span>
+                  <h3>Dashboard Summary</h3>
+                </div>
+                <span className="prototype-tag">Sample Data</span>
+              </div>
 
-          <div className="empty-workspace">
-            <div className="empty-icon">✦</div>
-            <h3>Dashboard workspace is ready</h3>
-            <p>
-              {activePage === "Overview"
-                ? "The TerraSpectra dashboard foundation has been initialized."
-                : `${activePage} module will be developed in the upcoming tasks.`}
-            </p>
-          </div>
-        </section>
+              <div className="summary-grid">
+                {summaryCards.map((card) => (
+                  <div className="summary-card" key={card.title}>
+                    <div className="summary-card-top">
+                      <div className={`summary-icon ${card.color}`}>
+                        {card.icon}
+                      </div>
+                      <span className="summary-indicator">●</span>
+                    </div>
+
+                    <p className="summary-title">{card.title}</p>
+                    <h2>{card.value}</h2>
+                    <p className="summary-description">
+                      {card.change}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="workspace-card overview-workspace">
+              <div className="card-heading">
+                <div>
+                  <span className="section-tag">CROP STATUS</span>
+                  <h3>Crop Health Distribution</h3>
+                </div>
+                <span className="prototype-tag">Sample Data</span>
+              </div>
+
+              <div className="health-summary">
+                <div className="health-item">
+                  <div className="health-label">
+                    <span>Healthy Crops</span>
+                    <strong>67%</strong>
+                  </div>
+                  <div className="health-track">
+                    <div className="health-fill healthy-fill"></div>
+                  </div>
+                </div>
+
+                <div className="health-item">
+                  <div className="health-label">
+                    <span>Moderate Risk</span>
+                    <strong>14%</strong>
+                  </div>
+                  <div className="health-track">
+                    <div className="health-fill moderate-fill"></div>
+                  </div>
+                </div>
+
+                <div className="health-item">
+                  <div className="health-label">
+                    <span>High Risk</span>
+                    <strong>19%</strong>
+                  </div>
+                  <div className="health-track">
+                    <div className="health-fill high-fill"></div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="sample-note">
+                Note: These values are illustrative sample data for the
+                dashboard UI. They are not actual model predictions.
+              </p>
+            </section>
+          </>
+        ) : (
+          <section className="workspace-card">
+            <div className="card-heading">
+              <div>
+                <span className="section-tag">PROJECT WORKSPACE</span>
+                <h3>{activePage}</h3>
+              </div>
+              <span className="prototype-tag">UI Prototype</span>
+            </div>
+
+            <div className="empty-workspace">
+              <div className="empty-icon">✦</div>
+              <h3>Dashboard workspace is ready</h3>
+              <p>
+                {activePage} module will be developed in the upcoming tasks.
+              </p>
+            </div>
+          </section>
+        )}
 
         <footer>
           TerraSpectra · Hyperspectral Crop Disease Forecasting
@@ -95,3 +205,4 @@ function App() {
 }
 
 export default App;
+
