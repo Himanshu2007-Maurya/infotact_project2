@@ -1,4 +1,5 @@
-﻿* {
+﻿
+* {
   box-sizing: border-box;
 }
 
@@ -280,4 +281,5 @@ footer {
   width: 19%;
   background: #df7770;
 }
+
 
