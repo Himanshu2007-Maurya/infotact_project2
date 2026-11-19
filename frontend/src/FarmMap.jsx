@@ -1,3 +1,4 @@
+
 import { useMemo, useState } from "react";
 import DeckGL from "@deck.gl/react";
 import { ScatterplotLayer } from "@deck.gl/layers";
@@ -8,8 +9,15 @@ import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 
 import "maplibre-gl/dist/maplibre-gl.css";
 
-// Configure MapLibre worker for Vite
 setWorkerUrl(workerUrl);
+
+const INITIAL_VIEW_STATE = {
+  longitude: 75.85,
+  latitude: 30.90,
+  zoom: 10,
+  pitch: 0,
+  bearing: 0,
+};
 
 const farmLocations = [
   {
@@ -33,13 +41,7 @@ const farmLocations = [
 ];
 
 function FarmMap() {
-  const [viewState, setViewState] = useState({
-    longitude: 75.85,
-    latitude: 30.90,
-    zoom: 10,
-    pitch: 0,
-    bearing: 0,
-  });
+  const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
 
   const layers = useMemo(
     () => [
@@ -59,6 +61,24 @@ function FarmMap() {
     ],
     []
   );
+
+  const zoomIn = () => {
+    setViewState((previous) => ({
+      ...previous,
+      zoom: Math.min(previous.zoom + 1, 18),
+    }));
+  };
+
+  const zoomOut = () => {
+    setViewState((previous) => ({
+      ...previous,
+      zoom: Math.max(previous.zoom - 1, 2),
+    }));
+  };
+
+  const resetView = () => {
+    setViewState({ ...INITIAL_VIEW_STATE });
+  };
 
   return (
     <div className="farm-map-container">
@@ -82,10 +102,29 @@ function FarmMap() {
           pointerEvents: "none",
         }}
       />
+
+      <div className="map-controls">
+        <button onClick={zoomIn} title="Zoom In">
+          +
+        </button>
+
+        <button onClick={zoomOut} title="Zoom Out">
+          −
+        </button>
+
+        <button onClick={resetView} title="Reset Map View">
+          ⌂
+        </button>
+      </div>
+
+      <div className="map-coordinates">
+        Zoom: {viewState.zoom.toFixed(1)}x
+      </div>
     </div>
   );
 }
 
 export default FarmMap;
+
 
 
