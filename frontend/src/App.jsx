@@ -1,4 +1,5 @@
-﻿import FarmMap from "./FarmMap";
+﻿
+import FarmMap from "./FarmMap";
 import { useState } from "react";
 import "./App.css";
 
@@ -83,6 +84,7 @@ function App() {
             <p className="breadcrumb">Workspace / {activePage}</p>
             <h1>{activePage}</h1>
           </div>
+
           <div className="profile">
             <span className="online-dot"></span>
             Prototype
@@ -106,6 +108,7 @@ function App() {
                   <span className="section-tag">FARM OVERVIEW</span>
                   <h3>Dashboard Summary</h3>
                 </div>
+
                 <span className="prototype-tag">Sample Data</span>
               </div>
 
@@ -116,11 +119,13 @@ function App() {
                       <div className={`summary-icon ${card.color}`}>
                         {card.icon}
                       </div>
+
                       <span className="summary-indicator">●</span>
                     </div>
 
                     <p className="summary-title">{card.title}</p>
                     <h2>{card.value}</h2>
+
                     <p className="summary-description">
                       {card.change}
                     </p>
@@ -129,26 +134,23 @@ function App() {
               </div>
             </section>
 
-
-            {/* Day 5 & Day 6 - Farm Map */}
+            {/* Day 5, Day 6, Day 7 and Day 8 - Farm Map */}
             <section className="workspace-card farm-map-section">
               <div className="card-heading">
                 <div>
-                  <span className="section-tag">GEOGRAPHICAL MONITORING</span>
+                  <span className="section-tag">
+                    GEOGRAPHICAL MONITORING
+                  </span>
                   <h3>Farm Location Map</h3>
                 </div>
-                <span className="prototype-tag">Interactive Map</span>
+
+                <span className="prototype-tag">
+                  Interactive Map
+                </span>
               </div>
 
               <FarmMap />
-
-              <div className="map-legend">
-                <span>🟢 Low Risk</span>
-                <span>🟠 Moderate Risk</span>
-                <span>🔴 High Risk</span>
-              </div>
             </section>
-
 
             <section className="workspace-card overview-workspace">
               <div className="card-heading">
@@ -156,6 +158,7 @@ function App() {
                   <span className="section-tag">CROP STATUS</span>
                   <h3>Crop Health Distribution</h3>
                 </div>
+
                 <span className="prototype-tag">Sample Data</span>
               </div>
 
@@ -165,6 +168,7 @@ function App() {
                     <span>Healthy Crops</span>
                     <strong>67%</strong>
                   </div>
+
                   <div className="health-track">
                     <div className="health-fill healthy-fill"></div>
                   </div>
@@ -175,6 +179,7 @@ function App() {
                     <span>Moderate Risk</span>
                     <strong>14%</strong>
                   </div>
+
                   <div className="health-track">
                     <div className="health-fill moderate-fill"></div>
                   </div>
@@ -185,6 +190,7 @@ function App() {
                     <span>High Risk</span>
                     <strong>19%</strong>
                   </div>
+
                   <div className="health-track">
                     <div className="health-fill high-fill"></div>
                   </div>
@@ -204,12 +210,14 @@ function App() {
                 <span className="section-tag">PROJECT WORKSPACE</span>
                 <h3>{activePage}</h3>
               </div>
+
               <span className="prototype-tag">UI Prototype</span>
             </div>
 
             <div className="empty-workspace">
               <div className="empty-icon">✦</div>
               <h3>Dashboard workspace is ready</h3>
+
               <p>
                 {activePage} module will be developed in the upcoming tasks.
               </p>
@@ -226,4 +234,5 @@ function App() {
 }
 
 export default App;
+
 

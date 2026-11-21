@@ -54,20 +54,43 @@ function FarmMap() {
   });
 
   const [showHeatmap, setShowHeatmap] = useState(true);
+  const [selectedFarm, setSelectedFarm] = useState(null);
+
+  const visibleFarms = useMemo(
+    () => farmLocations.filter((farm) => visibleRisks[farm.risk]),
+    [visibleRisks]
+  );
 
   const toggleRisk = (risk) => {
     setVisibleRisks((previous) => ({
       ...previous,
       [risk]: !previous[risk],
     }));
+
+    if (selectedFarm?.risk === risk) {
+      setSelectedFarm(null);
+    }
   };
 
   const layers = useMemo(() => {
-    const visibleFarms = farmLocations.filter(
-      (farm) => visibleRisks[farm.risk]
-    );
+    const mapLayers = [];
 
-    const mapLayers = [
+    if (showHeatmap) {
+      mapLayers.push(
+        new HeatmapLayer({
+          id: "farm-risk-heatmap",
+          data: visibleFarms,
+          getPosition: (farm) => farm.coordinates,
+          getWeight: (farm) => farm.intensity,
+          radiusPixels: 65,
+          intensity: 1,
+          threshold: 0.03,
+          opacity: 0.45,
+        })
+      );
+    }
+
+    mapLayers.push(
       new ScatterplotLayer({
         id: "farm-markers",
         data: visibleFarms,
@@ -80,26 +103,11 @@ function FarmMap() {
         stroked: true,
         getLineColor: [255, 255, 255],
         lineWidthMinPixels: 2,
-      }),
-    ];
-
-    if (showHeatmap) {
-      mapLayers.unshift(
-        new HeatmapLayer({
-          id: "farm-risk-heatmap",
-          data: farmLocations,
-          getPosition: (farm) => farm.coordinates,
-          getWeight: (farm) => farm.intensity,
-          radiusPixels: 65,
-          intensity: 1,
-          threshold: 0.03,
-          opacity: 0.45,
-        })
-      );
-    }
+      })
+    );
 
     return mapLayers;
-  }, [visibleRisks, showHeatmap]);
+  }, [visibleFarms, showHeatmap]);
 
   const zoomIn = () => {
     setViewState((previous) => ({
@@ -117,46 +125,163 @@ function FarmMap() {
 
   const resetView = () => {
     setViewState({ ...INITIAL_VIEW_STATE });
+    setSelectedFarm(null);
+  };
+
+  const handleMapClick = (info) => {
+    if (info?.object) {
+      setSelectedFarm(info.object);
+    } else {
+      setSelectedFarm(null);
+    }
   };
 
   return (
-    <div className="farm-map-container">
-      <Map
-        {...viewState}
-        onMove={(event) => setViewState(event.viewState)}
-        mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-        style={{ width: "100%", height: "420px" }}
-      />
+    <div className="farm-map-widget">
 
-      <DeckGL
-        viewState={viewState}
-        controller={false}
-        layers={layers}
-        style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-        }}
-      />
+      <div className="map-layer-panel">
+        <div className="map-panel-heading">
+          <strong>Map Layers</strong>
+          <span>Layer Controls</span>
+        </div>
 
-      <div className="map-controls">
-        <button onClick={zoomIn} title="Zoom In">+</button>
-        <button onClick={zoomOut} title="Zoom Out">−</button>
-        <button onClick={resetView} title="Reset Map View">⌂</button>
+        <label className="map-layer-option">
+          <input
+            type="checkbox"
+            checked={visibleRisks.Low}
+            onChange={() => toggleRisk("Low")}
+          />
+          <span className="risk-dot low-dot"></span>
+          Low Risk
+        </label>
+
+        <label className="map-layer-option">
+          <input
+            type="checkbox"
+            checked={visibleRisks.Moderate}
+            onChange={() => toggleRisk("Moderate")}
+          />
+          <span className="risk-dot moderate-dot"></span>
+          Moderate Risk
+        </label>
+
+        <label className="map-layer-option">
+          <input
+            type="checkbox"
+            checked={visibleRisks.High}
+            onChange={() => toggleRisk("High")}
+          />
+          <span className="risk-dot high-dot"></span>
+          High Risk
+        </label>
+
+        <div className="map-panel-divider"></div>
+
+        <label className="map-layer-option heatmap-option">
+          <input
+            type="checkbox"
+            checked={showHeatmap}
+            onChange={(event) => setShowHeatmap(event.target.checked)}
+          />
+          <span>🌡️</span>
+          Heatmap Overlay
+        </label>
       </div>
 
-      <div className="map-coordinates">
-        Zoom: {viewState.zoom.toFixed(1)}x
+      <div className="farm-map-container">
+
+        <Map
+          {...viewState}
+          onMove={(event) => setViewState(event.viewState)}
+          mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+          style={{ width: "100%", height: "420px" }}
+        />
+
+        <DeckGL
+          viewState={viewState}
+          controller={false}
+          layers={layers}
+          onClick={handleMapClick}
+          getCursor={({ isHovering }) =>
+            isHovering ? "pointer" : "grab"
+          }
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "auto",
+          }}
+        />
+
+        <div className="map-controls">
+          <button onClick={zoomIn} title="Zoom In">+</button>
+          <button onClick={zoomOut} title="Zoom Out">−</button>
+          <button onClick={resetView} title="Reset Map View">⌂</button>
+        </div>
+
+        <div className="map-coordinates">
+          Zoom: {viewState.zoom.toFixed(1)}x
+        </div>
+
+        {showHeatmap && (
+          <div className="heatmap-label">
+            Sample Heatmap · Illustrative Only
+          </div>
+        )}
+
+        {selectedFarm && (
+          <div className="farm-info-panel">
+            <button
+              className="farm-info-close"
+              onClick={() => setSelectedFarm(null)}
+              title="Close farm information"
+            >
+              ×
+            </button>
+
+            <span className="section-tag">SELECTED FARM</span>
+            <h4>{selectedFarm.name}</h4>
+
+            <p>
+              <strong>Risk Level:</strong>{" "}
+              <span className={`risk-text ${selectedFarm.risk.toLowerCase()}`}>
+                {selectedFarm.risk}
+              </span>
+            </p>
+
+            <p>
+              <strong>Longitude:</strong>{" "}
+              {selectedFarm.coordinates[0].toFixed(4)}
+            </p>
+
+            <p>
+              <strong>Latitude:</strong>{" "}
+              {selectedFarm.coordinates[1].toFixed(4)}
+            </p>
+
+            <p className="farm-info-note">
+              Illustrative sample farm information.
+            </p>
+          </div>
+        )}
       </div>
 
-      <div className="heatmap-label">
-        Sample Heatmap
+      <div className="map-legend day8-map-legend">
+        <span><i className="legend-dot low-dot"></i> Low Risk</span>
+        <span><i className="legend-dot moderate-dot"></i> Moderate Risk</span>
+        <span><i className="legend-dot high-dot"></i> High Risk</span>
       </div>
+
+      <p className="sample-data-warning">
+        Note: Farm locations, risk levels and heatmap use illustrative
+        sample data. They do not represent actual disease predictions.
+      </p>
+
     </div>
   );
 }
 
 export default FarmMap;
+
 
 
 

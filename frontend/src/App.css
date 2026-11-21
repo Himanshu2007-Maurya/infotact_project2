@@ -410,6 +410,248 @@ footer {
   font-size: 12px;
 }
 
+/* ================================
+   DAY 8 - MAP LAYER CONTROLS
+================================ */
+
+.farm-map-widget {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.map-layer-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.map-panel-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-right: 10px;
+}
+
+.map-panel-heading strong {
+  color: #1e293b;
+  font-size: 13px;
+}
+
+.map-panel-heading span {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.map-layer-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.map-layer-option input {
+  width: 15px;
+  height: 15px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.risk-dot,
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.low-dot {
+  background: #22c55e;
+}
+
+.moderate-dot {
+  background: #f59e0b;
+}
+
+.high-dot {
+  background: #ef4444;
+}
+
+.map-panel-divider {
+  width: 1px;
+  height: 25px;
+  background: #cbd5e1;
+}
+
+.heatmap-option {
+  font-weight: 600;
+}
+
+.day8-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 14px 4px;
+}
+
+.day8-map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.heatmap-label {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  z-index: 5;
+  padding: 7px 11px;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.sample-data-warning {
+  margin: 5px 0 12px;
+  padding: 10px 12px;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ================================
+   DAY 8 - FARM INFORMATION PANEL
+================================ */
+
+.farm-info-panel {
+  position: absolute;
+  z-index: 10;
+  top: 55px;
+  right: 14px;
+  width: 230px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+}
+
+.farm-info-panel h4 {
+  margin: 8px 0 12px;
+  color: #0f172a;
+  font-size: 17px;
+}
+
+.farm-info-panel p {
+  margin: 8px 0;
+  color: #475569;
+  font-size: 12px;
+}
+
+.farm-info-panel p strong {
+  color: #1e293b;
+}
+
+.farm-info-close {
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.risk-text {
+  font-weight: 700;
+}
+
+.risk-text.low {
+  color: #16a34a;
+}
+
+.risk-text.moderate {
+  color: #d97706;
+}
+
+.risk-text.high {
+  color: #dc2626;
+}
+
+.farm-info-note {
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+  font-style: italic;
+}
+
+/* ================================
+   DAY 8 - RESPONSIVE CONTROLS
+================================ */
+
+@media (max-width: 768px) {
+  .map-layer-panel {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .map-panel-heading {
+    width: 100%;
+  }
+
+  .map-panel-divider {
+    display: none;
+  }
+
+  .farm-info-panel {
+    top: 55px;
+    right: 8px;
+    width: 190px;
+    padding: 12px;
+  }
+
+  .day8-map-legend {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-layer-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .farm-map-container {
+    height: 420px;
+  }
+
+  .farm-info-panel {
+    width: 175px;
+  }
+}
+
 
 
 
