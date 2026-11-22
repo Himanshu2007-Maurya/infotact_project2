@@ -1,33 +1,16 @@
-# TerraSpectra: Hyperspectral Crop Disease Forecasting
+# TerraSpectra — Day 8 GitHub Upload
 
-## Project Overview
-TerraSpectra is an AI-powered precision agriculture project designed to analyze hyperspectral crop imagery and identify early indicators of crop stress and potential disease.
+## Contents
+- `ml/notebooks/TerraSpectra_Day08_Baseline_3D_CNN.ipynb`
 
-## Objectives
-- Process hyperspectral image data.
-- Apply PCA for dimensionality reduction.
-- Develop a hybrid 3D-CNN and Vision Transformer model.
-- Identify healthy and stressed crop regions.
-- Develop a FastAPI prediction service.
-- Visualize crop health using an interactive GIS dashboard.
+## Run
+Open the notebook in Google Colab and upload the Day 7 ZIP or the three PyTorch patch tensors:
+- `X_train_patches.pt`
+- `X_validation_patches.pt`
+- `X_test_patches.pt`
 
-## Technology Stack
-- Python
-- NumPy and Pandas
-- Scikit-learn
-- PyTorch
-- Rasterio
-- FastAPI
-- React
-- Deck.gl
-- Plotly
+## Scientific limitation
+The current annotation coordinates are not verified disease/health labels. This notebook implements and forward-pass tests the 3D-CNN architecture but does not train a supervised classifier or report disease accuracy.
 
-## Project Duration
-20 Days
-
-## Team
-- AI/ML and Backend Development
-- Frontend and GIS Development
-
-## Current Progress
-Day 1 – Project initialization and ML environment setup.
+## Suggested commit
+`Day 8: Implement baseline 3D-CNN architecture for hyperspectral patches`
