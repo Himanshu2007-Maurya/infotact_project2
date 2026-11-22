@@ -44,6 +44,12 @@ function App() {
     },
   ];
 
+  const cropHealthData = [
+    { label: "Healthy Crops", value: 67, color: "#58b77a" },
+    { label: "Moderate Risk", value: 14, color: "#e7b45d" },
+    { label: "High Risk", value: 19, color: "#df7770" },
+  ];
+
   return (
     <div className="app-layout">
       <aside className="sidebar">
@@ -81,7 +87,9 @@ function App() {
       <main className="main-content">
         <header className="topbar">
           <div>
-            <p className="breadcrumb">Workspace / {activePage}</p>
+            <p className="breadcrumb">
+              Workspace / {activePage}
+            </p>
             <h1>{activePage}</h1>
           </div>
 
@@ -92,7 +100,9 @@ function App() {
         </header>
 
         <section className="welcome-section">
-          <p className="eyebrow">HYPERSPECTRAL CROP INTELLIGENCE</p>
+          <p className="eyebrow">
+            HYPERSPECTRAL CROP INTELLIGENCE
+          </p>
           <h2>Welcome to TerraSpectra</h2>
           <p>
             Monitor crop health and explore hyperspectral insights
@@ -105,11 +115,15 @@ function App() {
             <section className="summary-section">
               <div className="summary-heading">
                 <div>
-                  <span className="section-tag">FARM OVERVIEW</span>
+                  <span className="section-tag">
+                    FARM OVERVIEW
+                  </span>
                   <h3>Dashboard Summary</h3>
                 </div>
 
-                <span className="prototype-tag">Sample Data</span>
+                <span className="prototype-tag">
+                  Sample Data
+                </span>
               </div>
 
               <div className="summary-grid">
@@ -152,54 +166,136 @@ function App() {
               <FarmMap />
             </section>
 
-            <section className="workspace-card overview-workspace">
+            {/* Day 9 - Crop Health Analytics */}
+            <section className="workspace-card overview-workspace day9-analytics">
               <div className="card-heading">
                 <div>
-                  <span className="section-tag">CROP STATUS</span>
+                  <span className="section-tag">
+                    CROP HEALTH ANALYTICS
+                  </span>
                   <h3>Crop Health Distribution</h3>
                 </div>
 
-                <span className="prototype-tag">Sample Data</span>
+                <span className="prototype-tag">
+                  Sample Data
+                </span>
               </div>
 
-              <div className="health-summary">
-                <div className="health-item">
-                  <div className="health-label">
-                    <span>Healthy Crops</span>
-                    <strong>67%</strong>
-                  </div>
+              <div className="day9-chart-grid">
+                {/* Doughnut Chart */}
+                <div className="day9-chart-card">
+                  <h4>Crop Health Overview</h4>
+                  <p className="day9-chart-subtitle">
+                    Distribution by crop health category
+                  </p>
 
-                  <div className="health-track">
-                    <div className="health-fill healthy-fill"></div>
+                  <div className="day9-donut-layout">
+                    <div
+                      className="day9-donut"
+                      role="img"
+                      aria-label="Crop health distribution: 67 percent healthy, 14 percent moderate risk, 19 percent high risk"
+                    >
+                      <div className="day9-donut-center">
+                        <strong>100%</strong>
+                        <span>Total</span>
+                      </div>
+                    </div>
+
+                    <div className="day9-chart-legend">
+                      {cropHealthData.map((item) => (
+                        <div
+                          className="day9-legend-item"
+                          key={item.label}
+                        >
+                          <span
+                            className="day9-legend-dot"
+                            style={{ backgroundColor: item.color }}
+                          ></span>
+
+                          <span>{item.label}</span>
+                          <strong>{item.value}%</strong>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="health-item">
-                  <div className="health-label">
-                    <span>Moderate Risk</span>
-                    <strong>14%</strong>
-                  </div>
+                {/* Bar Chart */}
+                <div className="day9-chart-card">
+                  <h4>Health Category Comparison</h4>
+                  <p className="day9-chart-subtitle">
+                    Percentage across health categories
+                  </p>
 
-                  <div className="health-track">
-                    <div className="health-fill moderate-fill"></div>
+                  <div className="day9-bar-chart">
+                    {cropHealthData.map((item) => (
+                      <div
+                        className="day9-bar-item"
+                        key={item.label}
+                      >
+                        <div className="day9-bar-heading">
+                          <span>{item.label}</span>
+                          <strong>{item.value}%</strong>
+                        </div>
+
+                        <div className="day9-bar-track">
+                          <div
+                            className="day9-bar-fill"
+                            style={{
+                              width: `${item.value}%`,
+                              backgroundColor: item.color,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
+              </div>
 
-                <div className="health-item">
-                  <div className="health-label">
-                    <span>High Risk</span>
-                    <strong>19%</strong>
+              {/* Existing Crop Health Summary */}
+              <div className="day9-existing-summary">
+                <h4>Crop Health Summary</h4>
+
+                <div className="health-summary">
+                  <div className="health-item">
+                    <div className="health-label">
+                      <span>Healthy Crops</span>
+                      <strong>67%</strong>
+                    </div>
+
+                    <div className="health-track">
+                      <div className="health-fill healthy-fill"></div>
+                    </div>
                   </div>
 
-                  <div className="health-track">
-                    <div className="health-fill high-fill"></div>
+                  <div className="health-item">
+                    <div className="health-label">
+                      <span>Moderate Risk</span>
+                      <strong>14%</strong>
+                    </div>
+
+                    <div className="health-track">
+                      <div className="health-fill moderate-fill"></div>
+                    </div>
+                  </div>
+
+                  <div className="health-item">
+                    <div className="health-label">
+                      <span>High Risk</span>
+                      <strong>19%</strong>
+                    </div>
+
+                    <div className="health-track">
+                      <div className="health-fill high-fill"></div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <p className="sample-note">
-                Note: These values are illustrative sample data for the
-                dashboard UI. They are not actual model predictions.
+                Note: These values are illustrative sample data for
+                the dashboard UI. They are not actual model predictions.
               </p>
             </section>
           </>
@@ -207,11 +303,15 @@ function App() {
           <section className="workspace-card">
             <div className="card-heading">
               <div>
-                <span className="section-tag">PROJECT WORKSPACE</span>
+                <span className="section-tag">
+                  PROJECT WORKSPACE
+                </span>
                 <h3>{activePage}</h3>
               </div>
 
-              <span className="prototype-tag">UI Prototype</span>
+              <span className="prototype-tag">
+                UI Prototype
+              </span>
             </div>
 
             <div className="empty-workspace">
