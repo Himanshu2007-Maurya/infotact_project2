@@ -1,10 +1,55 @@
 ﻿
 import FarmMap from "./FarmMap";
 import { useState } from "react";
+import Plot from "react-plotly.js";
 import "./App.css";
+
+const cropHealthData = [
+  { label: "Healthy Crops", value: 67, color: "#58b77a" },
+  { label: "Moderate Risk", value: 14, color: "#e7b45d" },
+  { label: "High Risk", value: 19, color: "#df7770" },
+];
+
+// Day 10: Illustrative analytics dataset
+const analyticsRecords = [
+  { crop: "Wheat", risk: "Low", health: 88, month: "January" },
+  { crop: "Rice", risk: "Moderate", health: 72, month: "January" },
+  { crop: "Maize", risk: "High", health: 48, month: "January" },
+  { crop: "Cotton", risk: "Low", health: 84, month: "January" },
+
+  { crop: "Wheat", risk: "Moderate", health: 76, month: "February" },
+  { crop: "Rice", risk: "Low", health: 91, month: "February" },
+  { crop: "Maize", risk: "Moderate", health: 69, month: "February" },
+  { crop: "Cotton", risk: "High", health: 52, month: "February" },
+
+  { crop: "Wheat", risk: "Low", health: 90, month: "March" },
+  { crop: "Rice", risk: "High", health: 55, month: "March" },
+  { crop: "Maize", risk: "Low", health: 86, month: "March" },
+  { crop: "Cotton", risk: "Moderate", health: 73, month: "March" },
+];
+
+const chartLayout = {
+  autosize: true,
+  height: 320,
+  margin: { t: 20, r: 20, b: 55, l: 45 },
+  paper_bgcolor: "rgba(0,0,0,0)",
+  plot_bgcolor: "rgba(0,0,0,0)",
+  font: {
+    family: "Inter, Arial, sans-serif",
+    color: "#52675c",
+    size: 11,
+  },
+};
+
+const chartConfig = {
+  responsive: true,
+  displayModeBar: false,
+};
 
 function App() {
   const [activePage, setActivePage] = useState("Overview");
+  const [selectedCrop, setSelectedCrop] = useState("All");
+  const [selectedRisk, setSelectedRisk] = useState("All");
 
   const navigation = [
     "Overview",
@@ -44,11 +89,64 @@ function App() {
     },
   ];
 
-  const cropHealthData = [
-    { label: "Healthy Crops", value: 67, color: "#58b77a" },
-    { label: "Moderate Risk", value: 14, color: "#e7b45d" },
-    { label: "High Risk", value: 19, color: "#df7770" },
-  ];
+  // Apply selected filters to the sample dataset
+  const filteredRecords = analyticsRecords.filter((record) => {
+    const cropMatches =
+      selectedCrop === "All" || record.crop === selectedCrop;
+
+    const riskMatches =
+      selectedRisk === "All" || record.risk === selectedRisk;
+
+    return cropMatches && riskMatches;
+  });
+
+  // Risk distribution for the pie chart
+  const riskCategories = ["Low", "Moderate", "High"];
+
+  const riskCounts = riskCategories.map((risk) =>
+    filteredRecords.filter((record) => record.risk === risk).length
+  );
+
+  // Average crop health for the bar chart
+  const cropCategories = ["Wheat", "Rice", "Maize", "Cotton"];
+
+  const cropAverages = cropCategories.map((crop) => {
+    const cropRecords = filteredRecords.filter(
+      (record) => record.crop === crop
+    );
+
+    if (cropRecords.length === 0) return 0;
+
+    const total = cropRecords.reduce(
+      (sum, record) => sum + record.health,
+      0
+    );
+
+    return Math.round(total / cropRecords.length);
+  });
+
+  // Monthly average crop health for the line chart
+  const months = ["January", "February", "March"];
+
+  const monthlyAverages = months.map((month) => {
+    const monthRecords = filteredRecords.filter(
+      (record) => record.month === month
+    );
+
+    if (monthRecords.length === 0) return null;
+
+    const total = monthRecords.reduce(
+      (sum, record) => sum + record.health,
+      0
+    );
+
+    return Math.round(total / monthRecords.length);
+  });
+
+  const resetFilters = () => {
+    setSelectedCrop("All");
+    setSelectedRisk("All");
+  };
 
   return (
     <div className="app-layout">
@@ -148,7 +246,7 @@ function App() {
               </div>
             </section>
 
-            {/* Day 5, Day 6, Day 7 and Day 8 - Farm Map */}
+            {/* Day 5 to Day 8 - Farm Map */}
             <section className="workspace-card farm-map-section">
               <div className="card-heading">
                 <div>
@@ -182,7 +280,6 @@ function App() {
               </div>
 
               <div className="day9-chart-grid">
-                {/* Doughnut Chart */}
                 <div className="day9-chart-card">
                   <h4>Crop Health Overview</h4>
                   <p className="day9-chart-subtitle">
@@ -220,7 +317,6 @@ function App() {
                   </div>
                 </div>
 
-                {/* Bar Chart */}
                 <div className="day9-chart-card">
                   <h4>Health Category Comparison</h4>
                   <p className="day9-chart-subtitle">
@@ -253,7 +349,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Existing Crop Health Summary */}
               <div className="day9-existing-summary">
                 <h4>Crop Health Summary</h4>
 
@@ -296,6 +391,231 @@ function App() {
               <p className="sample-note">
                 Note: These values are illustrative sample data for
                 the dashboard UI. They are not actual model predictions.
+              </p>
+            </section>
+
+            {/* Day 10 - Interactive Plotly Analytics */}
+            <section className="workspace-card day10-analytics">
+              <div className="card-heading">
+                <div>
+                  <span className="section-tag">
+                    INTERACTIVE DATA ANALYTICS
+                  </span>
+                  <h3>Crop Performance Analytics</h3>
+                </div>
+
+                <span className="prototype-tag">
+                  Plotly Charts
+                </span>
+              </div>
+
+              {/* Analytics Filters */}
+              <div className="day10-filter-panel">
+                <div className="day10-filter-heading">
+                  <strong>Filter Analytics</strong>
+                  <span>
+                    Select crop and risk level to update charts
+                  </span>
+                </div>
+
+                <div className="day10-filter-controls">
+                  <label>
+                    <span>Crop Type</span>
+                    <select
+                      value={selectedCrop}
+                      onChange={(event) =>
+                        setSelectedCrop(event.target.value)
+                      }
+                    >
+                      <option value="All">All Crops</option>
+                      <option value="Wheat">Wheat</option>
+                      <option value="Rice">Rice</option>
+                      <option value="Maize">Maize</option>
+                      <option value="Cotton">Cotton</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    <span>Risk Level</span>
+                    <select
+                      value={selectedRisk}
+                      onChange={(event) =>
+                        setSelectedRisk(event.target.value)
+                      }
+                    >
+                      <option value="All">All Risk Levels</option>
+                      <option value="Low">Low Risk</option>
+                      <option value="Moderate">Moderate Risk</option>
+                      <option value="High">High Risk</option>
+                    </select>
+                  </label>
+
+                  <button
+                    type="button"
+                    className="day10-reset-button"
+                    onClick={resetFilters}
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+
+                <p className="day10-result-count">
+                  Showing {filteredRecords.length} of{" "}
+                  {analyticsRecords.length} sample records
+                </p>
+              </div>
+
+              {/* Plotly Charts */}
+              {filteredRecords.length > 0 ? (
+                <div className="day10-chart-grid">
+                  <div className="day10-chart-card">
+                    <h4>Risk Level Distribution</h4>
+                    <p className="day10-chart-subtitle">
+                      Distribution of filtered farm records
+                    </p>
+
+                    <Plot
+                      data={[
+                        {
+                          type: "pie",
+                          labels: riskCategories,
+                          values: riskCounts,
+                          hole: 0.48,
+                          marker: {
+                            colors: ["#58b77a", "#e7b45d", "#df7770"],
+                          },
+                          textinfo: "label+percent",
+                          hovertemplate:
+                            "%{label}: %{value} farms<extra></extra>",
+                        },
+                      ]}
+                      layout={{
+                        ...chartLayout,
+                        showlegend: true,
+                        legend: {
+                          orientation: "h",
+                          x: 0.5,
+                          xanchor: "center",
+                          y: -0.12,
+                        },
+                      }}
+                      config={chartConfig}
+                      useResizeHandler
+                      style={{ width: "100%", height: "320px" }}
+                    />
+                  </div>
+
+                  <div className="day10-chart-card">
+                    <h4>Crop-wise Health Comparison</h4>
+                    <p className="day10-chart-subtitle">
+                      Average crop health percentage
+                    </p>
+
+                    <Plot
+                      data={[
+                        {
+                          type: "bar",
+                          x: cropCategories,
+                          y: cropAverages,
+                          marker: {
+                            color: [
+                              "#58b77a",
+                              "#5d9bd3",
+                              "#e7b45d",
+                              "#9c83c9",
+                            ],
+                          },
+                          text: cropAverages.map((value) =>
+                            value > 0 ? `${value}%` : "No data"
+                          ),
+                          textposition: "outside",
+                          hovertemplate:
+                            "%{x}: %{y}% health<extra></extra>",
+                        },
+                      ]}
+                      layout={{
+                        ...chartLayout,
+                        showlegend: false,
+                        yaxis: {
+                          title: "Crop Health (%)",
+                          range: [0, 110],
+                          gridcolor: "#e8eee9",
+                        },
+                        xaxis: {
+                          gridcolor: "rgba(0,0,0,0)",
+                        },
+                      }}
+                      config={chartConfig}
+                      useResizeHandler
+                      style={{ width: "100%", height: "320px" }}
+                    />
+                  </div>
+
+                  <div className="day10-chart-card day10-trend-card">
+                    <h4>Monthly Crop Health Trend</h4>
+                    <p className="day10-chart-subtitle">
+                      Average health score across months
+                    </p>
+
+                    <Plot
+                      data={[
+                        {
+                          type: "scatter",
+                          mode: "lines+markers",
+                          x: months,
+                          y: monthlyAverages,
+                          connectgaps: false,
+                          line: {
+                            color: "#38865d",
+                            width: 3,
+                          },
+                          marker: {
+                            color: "#58b77a",
+                            size: 10,
+                          },
+                          hovertemplate:
+                            "%{x}: %{y}% health<extra></extra>",
+                        },
+                      ]}
+                      layout={{
+                        ...chartLayout,
+                        showlegend: false,
+                        yaxis: {
+                          title: "Average Health (%)",
+                          range: [0, 110],
+                          gridcolor: "#e8eee9",
+                        },
+                        xaxis: {
+                          title: "Month",
+                          gridcolor: "rgba(0,0,0,0)",
+                        },
+                      }}
+                      config={chartConfig}
+                      useResizeHandler
+                      style={{ width: "100%", height: "320px" }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="day10-empty-state">
+                  <span>📊</span>
+                  <h4>No matching records found</h4>
+                  <p>
+                    Try changing the crop type or risk level filters.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={resetFilters}
+                  >
+                    Clear Filters
+                  </button>
+                </div>
+              )}
+
+              <p className="day10-sample-note">
+                Note: Day 10 charts use illustrative sample records
+                for frontend demonstration. They are not connected to
+                actual disease predictions or live farm data.
               </p>
             </section>
           </>
