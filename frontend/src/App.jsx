@@ -1,5 +1,4 @@
-﻿
-import FarmMap from "./FarmMap";
+﻿import FarmMap from "./FarmMap";
 import { useState } from "react";
 import Plot from "react-plotly.js";
 import "./App.css";
@@ -28,6 +27,99 @@ const analyticsRecords = [
   { crop: "Cotton", risk: "Moderate", health: 73, month: "March" },
 ];
 
+
+// Day 11: Illustrative disease information for the details panel
+const diseaseDetailsData = [
+  {
+    name: "Wheat Rust",
+    crop: "Wheat",
+    risk: "High",
+    symptoms: [
+      "Small orange-brown or yellow rust-like pustules on leaves",
+      "Yellowing of affected leaf areas",
+      "Reduced plant vigour in severe cases",
+    ],
+    actions: [
+      "Inspect nearby plants and check whether symptoms are spreading",
+      "Remove heavily affected plant material where practical",
+      "Consult a local agricultural expert before selecting any treatment",
+    ],
+    prevention: [
+      "Use locally recommended resistant varieties",
+      "Monitor the crop regularly, especially during favourable weather",
+      "Follow recommended field sanitation and crop-management practices",
+    ],
+    description:
+      "A fungal disease group that can affect wheat leaves and reduce crop performance.",
+  },
+  {
+    name: "Rice Blast",
+    crop: "Rice",
+    risk: "High",
+    symptoms: [
+      "Spindle-shaped lesions with grey or whitish centres",
+      "Brown or reddish margins around leaf lesions",
+      "In severe cases, lesions may appear on nodes or panicles",
+    ],
+    actions: [
+      "Inspect affected and neighbouring areas for similar symptoms",
+      "Avoid making treatment decisions from this sample panel alone",
+      "Seek advice from a qualified local agriculture officer",
+    ],
+    prevention: [
+      "Use suitable resistant varieties where available",
+      "Avoid excessive nitrogen application",
+      "Maintain recommended spacing and field-management practices",
+    ],
+    description:
+      "A fungal disease that may affect rice leaves, nodes and panicles.",
+  },
+  {
+    name: "Maize Leaf Blight",
+    crop: "Maize",
+    risk: "Moderate",
+    symptoms: [
+      "Long, cigar-shaped grey-green or tan lesions on leaves",
+      "Lesions may enlarge and join together",
+      "Lower leaves can show symptoms first",
+    ],
+    actions: [
+      "Check the size and spread of lesions across multiple plants",
+      "Record affected field locations for follow-up monitoring",
+      "Ask a local crop specialist to confirm the cause",
+    ],
+    prevention: [
+      "Use healthy seed and locally recommended varieties",
+      "Manage crop residues according to local guidance",
+      "Maintain balanced crop nutrition",
+    ],
+    description:
+      "A leaf disease that can reduce healthy leaf area when symptoms become severe.",
+  },
+  {
+    name: "Cotton Leaf Curl",
+    crop: "Cotton",
+    risk: "Moderate",
+    symptoms: [
+      "Upward or downward curling of leaves",
+      "Thickening of veins and a leathery leaf appearance",
+      "Stunted growth in affected plants",
+    ],
+    actions: [
+      "Inspect plants for symptoms and possible whitefly presence",
+      "Monitor affected patches and record their location",
+      "Confirm the problem with a local agricultural specialist",
+    ],
+    prevention: [
+      "Use recommended varieties and healthy planting material",
+      "Monitor vector populations regularly",
+      "Follow integrated pest-management guidance",
+    ],
+    description:
+      "A viral disease complex associated with cotton leaf-curl symptoms and whitefly transmission.",
+  },
+];
+
 const chartLayout = {
   autosize: true,
   height: 320,
@@ -50,6 +142,7 @@ function App() {
   const [activePage, setActivePage] = useState("Overview");
   const [selectedCrop, setSelectedCrop] = useState("All");
   const [selectedRisk, setSelectedRisk] = useState("All");
+  const [selectedDisease, setSelectedDisease] = useState("Wheat Rust");
 
   const navigation = [
     "Overview",
@@ -618,6 +711,113 @@ function App() {
                 actual disease predictions or live farm data.
               </p>
             </section>
+
+            {/* Day 11 - Disease Category and Details Panel */}
+            <section className="workspace-card day11-disease-section">
+              <div className="card-heading">
+                <div>
+                  <span className="section-tag">
+                    DISEASE INTELLIGENCE
+                  </span>
+                  <h3>Disease Category & Details</h3>
+                </div>
+
+                <span className="prototype-tag">
+                  Sample Information
+                </span>
+              </div>
+
+              <div className="day11-disease-intro">
+                Select a disease category to view its crop, risk level,
+                common symptoms, suggested follow-up actions and prevention
+                practices.
+              </div>
+
+              <div className="day11-disease-selector">
+                <label htmlFor="day11-disease-select">
+                  Select Disease Category
+                </label>
+                <select
+                  id="day11-disease-select"
+                  value={selectedDisease}
+                  onChange={(event) => setSelectedDisease(event.target.value)}
+                >
+                  {diseaseDetailsData.map((disease) => (
+                    <option key={disease.name} value={disease.name}>
+                      {disease.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {diseaseDetailsData
+                .filter((disease) => disease.name === selectedDisease)
+                .map((disease) => (
+                  <div className="day11-disease-content" key={disease.name}>
+                    <div className="day11-disease-overview">
+                      <div>
+                        <span className="day11-overview-label">
+                          SELECTED DISEASE
+                        </span>
+                        <h4>{disease.name}</h4>
+                        <p>{disease.description}</p>
+                      </div>
+
+                      <div className="day11-disease-meta">
+                        <div className="day11-meta-item">
+                          <span>Crop</span>
+                          <strong>{disease.crop}</strong>
+                        </div>
+                        <div className="day11-meta-item">
+                          <span>Sample Risk Level</span>
+                          <strong
+                            className={`day11-risk-badge ${disease.risk.toLowerCase()}`}
+                          >
+                            {disease.risk}
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="day11-detail-grid">
+                      <div className="day11-detail-card">
+                        <h5><span>◎</span> Common Symptoms</h5>
+                        <ul>
+                          {disease.symptoms.map((symptom) => (
+                            <li key={symptom}>{symptom}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="day11-detail-card">
+                        <h5><span>✓</span> Recommended Follow-up</h5>
+                        <ul>
+                          {disease.actions.map((action) => (
+                            <li key={action}>{action}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="day11-detail-card day11-prevention-card">
+                        <h5><span>✚</span> Prevention Practices</h5>
+                        <ul>
+                          {disease.prevention.map((practice) => (
+                            <li key={practice}>{practice}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+              <p className="day11-sample-note">
+                Note: Disease descriptions and risk levels are illustrative
+                reference content for the frontend prototype. They are not
+                generated by the TerraSpectra model, do not confirm a field
+                diagnosis, and must not be used as a substitute for local
+                agricultural expert advice.
+              </p>
+            </section>
           </>
         ) : (
           <section className="workspace-card">
@@ -654,5 +854,8 @@ function App() {
 }
 
 export default App;
+
+
+
 
 
