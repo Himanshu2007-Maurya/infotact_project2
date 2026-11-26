@@ -1554,3 +1554,271 @@ footer {
 
 
 
+
+/* ======================================================
+   TERRASPECTRA PREMIUM VISUAL PASS
+   Image-rich editorial dashboard styling
+====================================================== */
+:root {
+  --ts-forest: #102d24;
+  --ts-deep: #173e30;
+  --ts-leaf: #4f9b69;
+  --ts-mint: #dff1e3;
+  --ts-ink: #172d25;
+  --ts-muted: #6c8175;
+  --ts-line: rgba(38, 78, 56, .12);
+  --ts-shadow: 0 18px 48px rgba(23, 55, 39, .09);
+}
+
+body {
+  background: #eef4ef;
+  color: var(--ts-ink);
+  background-image: radial-gradient(circle at 92% 3%, rgba(125, 180, 137, .15), transparent 25%),
+                    radial-gradient(circle at 4% 38%, rgba(185, 213, 185, .18), transparent 24%);
+}
+
+.app-layout { background: transparent; }
+.sidebar {
+  position: relative;
+  isolation: isolate;
+  width: 270px;
+  min-width: 270px;
+  padding: 30px 20px;
+  background: linear-gradient(180deg, rgba(9, 37, 28, .96), rgba(17, 57, 41, .98)),
+    url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=80") center/cover;
+  box-shadow: 12px 0 40px rgba(13, 42, 30, .13);
+}
+.sidebar::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 34, 25, .84), rgba(9, 43, 30, .94));
+}
+.brand { margin-bottom: 62px; }
+.brand-icon { background: linear-gradient(145deg, #e1f6df, #8dc99a); box-shadow: 0 8px 22px rgba(139, 210, 154, .22); }
+.brand h2 { letter-spacing: -.4px; font-size: 18px; }
+.nav-item { min-height: 48px; border: 1px solid transparent; transition: .22s ease; }
+.nav-item:hover { transform: translateX(3px); background: rgba(255,255,255,.09); }
+.nav-item.active { background: linear-gradient(100deg, rgba(135, 198, 145, .25), rgba(135, 198, 145, .08)); border-color: rgba(187, 231, 190, .2); box-shadow: inset 3px 0 #a8d9ad; }
+.nav-dot { box-shadow: 0 0 0 4px rgba(134, 203, 161, .12); }
+.sidebar-footer { border-top: 1px solid rgba(255,255,255,.12); }
+
+.main-content { padding: 28px clamp(20px, 3.4vw, 54px) 40px; max-width: 1800px; }
+.topbar { border-bottom: 1px solid rgba(38,78,56,.13); padding-bottom: 18px; }
+.topbar h1 { font-size: clamp(24px, 2vw, 30px); letter-spacing: -.8px; color: #193b2b; }
+.profile { box-shadow: 0 5px 18px rgba(20, 58, 39, .06); }
+
+.welcome-section {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  min-height: 300px;
+  margin: 28px 0 22px;
+  padding: clamp(28px, 4vw, 54px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 25px;
+  color: #fff;
+  background: linear-gradient(90deg, rgba(7, 37, 25, .94) 0%, rgba(13, 57, 37, .79) 52%, rgba(13, 57, 37, .22) 100%),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=90") center 48%/cover;
+  box-shadow: 0 24px 55px rgba(13, 54, 34, .2);
+}
+.welcome-section::before { content: ""; position: absolute; z-index: -1; width: 380px; height: 380px; right: 17%; top: -240px; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; box-shadow: 0 0 0 35px rgba(255,255,255,.035), 0 0 0 75px rgba(255,255,255,.025); }
+.welcome-copy { max-width: 690px; }
+.welcome-section .eyebrow { color: #c1e9c8; font-size: 10px; letter-spacing: 2.4px; }
+.welcome-section h2 { max-width: 670px; margin: 16px 0 13px; color: #fff; font-size: clamp(31px, 4vw, 49px); line-height: 1.08; letter-spacing: -1.6px; }
+.welcome-section p:last-child { max-width: 590px; margin: 0; color: rgba(255,255,255,.82); font-size: 14px; line-height: 1.8; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 23px; }
+.hero-pills span { padding: 8px 12px; color: #effaf0; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 30px; backdrop-filter: blur(8px); font-size: 10px; letter-spacing: .2px; }
+.hero-side-note { display: flex; flex-direction: column; gap: 12px; min-width: 215px; max-width: 245px; padding: 22px; color: #fff; background: rgba(10, 42, 28, .43); border: 1px solid rgba(255,255,255,.28); border-radius: 17px; backdrop-filter: blur(13px); box-shadow: 0 15px 35px rgba(0,0,0,.12); }
+.hero-side-kicker { color: #c0e6c6; font-size: 9px; letter-spacing: 1.8px; font-weight: 800; }
+.hero-side-note strong { font-size: 19px; line-height: 1.35; letter-spacing: -.4px; }
+.hero-side-line { width: 42px; height: 3px; border-radius: 9px; background: #a6d9a8; }
+.hero-side-note small { color: rgba(255,255,255,.72); font-size: 10px; }
+
+.visual-strip { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 14px; margin: 0 0 30px; }
+.visual-tile { position: relative; isolation: isolate; min-height: 145px; overflow: hidden; border-radius: 17px; background: #244b36; box-shadow: 0 10px 25px rgba(22, 58, 38, .1); }
+.visual-tile::after { content: ""; position: absolute; z-index: 0; inset: 0; background: linear-gradient(0deg, rgba(6, 31, 20, .83), rgba(6, 31, 20, .02) 80%); }
+.visual-tile img { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.visual-tile:hover img { transform: scale(1.06); }
+.visual-tile div { position: absolute; z-index: 1; left: 17px; right: 14px; bottom: 15px; display: flex; flex-direction: column; gap: 5px; color: white; }
+.visual-tile span { color: #c8e8ca; font-size: 8px; font-weight: 800; letter-spacing: 1.5px; }
+.visual-tile strong { font-size: 14px; letter-spacing: -.2px; }
+
+.summary-heading { margin-bottom: 15px; }
+.summary-heading h3 { color: #1c3c2b; font-size: 21px; letter-spacing: -.5px; }
+.summary-card { position: relative; isolation: isolate; overflow: hidden; min-height: 165px; border: 1px solid rgba(38,78,56,.1); border-radius: 17px; box-shadow: 0 9px 24px rgba(24, 60, 39, .055); background: rgba(255,255,255,.92); }
+.summary-card::after { content: ""; position: absolute; z-index: -1; width: 125px; height: 125px; right: -37px; bottom: -53px; border-radius: 50%; background: radial-gradient(circle, rgba(100,166,112,.15), rgba(100,166,112,0)); }
+.summary-card:hover { transform: translateY(-5px); box-shadow: 0 17px 35px rgba(24, 60, 39, .11); }
+.summary-card h2 { color: #153e2a; font-size: 31px; letter-spacing: -.8px; }
+.summary-icon { box-shadow: inset 0 0 0 1px rgba(30,70,43,.04); }
+
+.workspace-card { position: relative; overflow: hidden; margin-bottom: 24px; padding: clamp(19px, 2.3vw, 29px); border: 1px solid rgba(38,78,56,.11); border-radius: 20px; background: rgba(255,255,255,.96); box-shadow: var(--ts-shadow); }
+.workspace-card::before { content: ""; position: absolute; pointer-events: none; top: 0; right: 0; width: 220px; height: 130px; opacity: .09; background: url("https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=700&q=75") center/cover; mask-image: linear-gradient(135deg, transparent 8%, #000 100%); }
+.card-heading { position: relative; z-index: 1; margin-bottom: 18px; }
+.card-heading h3 { color: #1c3c2b; font-size: 21px; letter-spacing: -.55px; }
+.section-tag { color: #568866; font-size: 9px; letter-spacing: 1.8px; }
+.prototype-tag { background: #eaf5eb; color: #34734a; border: 1px solid #dcecdf; font-weight: 700; letter-spacing: .3px; }
+
+.farm-map-section { background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(241,248,242,.96)); }
+.farm-map-container { border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 10px 24px rgba(20,55,35,.08); }
+.day9-analytics, .day10-analytics, .day11-disease-section { background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(246,250,246,.97)); }
+.day9-chart-card, .day10-chart-card, .day11-detail-card { border-radius: 16px !important; box-shadow: 0 8px 22px rgba(24,60,39,.055) !important; }
+.day9-chart-card:hover, .day10-chart-card:hover, .day11-detail-card:hover { box-shadow: 0 14px 30px rgba(24,60,39,.1) !important; }
+.day11-disease-overview { position: relative; overflow: hidden; background: linear-gradient(90deg, rgba(11,54,34,.92), rgba(17,78,47,.77)), url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1400&q=85") center/cover !important; border: 0 !important; }
+.day11-disease-overview h4, .day11-disease-overview p, .day11-overview-label { color: #fff !important; }
+.day11-disease-overview p { color: rgba(255,255,255,.82) !important; }
+.day11-meta-item { background: rgba(255,255,255,.94) !important; border: 1px solid rgba(255,255,255,.55) !important; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.day11-detail-card { background: #fff !important; }
+.day11-prevention-card { background: linear-gradient(120deg, #f4faf4, #fff) !important; }
+
+.empty-workspace { position: relative; min-height: 390px; margin-top: 12px; overflow: hidden; border-radius: 17px; color: #fff; background: linear-gradient(90deg, rgba(8,42,27,.91), rgba(10,51,32,.54)), url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1500&q=85") center/cover; }
+.empty-workspace h3 { color: #fff; font-size: 26px; }
+.empty-workspace p { max-width: 430px; color: rgba(255,255,255,.82); line-height: 1.7; }
+.empty-icon { background: rgba(255,255,255,.16); color: #fff; border: 1px solid rgba(255,255,255,.24); backdrop-filter: blur(8px); }
+footer { padding: 22px 0 8px; color: #809187; font-size: 11px; text-align: center; letter-spacing: .3px; }
+
+@media (max-width: 1000px) {
+  .sidebar { width: 230px; min-width: 230px; }
+  .hero-side-note { display: none; }
+}
+@media (max-width: 700px) {
+  .main-content { padding: 18px 14px 28px; }
+  .welcome-section { min-height: 280px; margin-top: 18px; padding: 26px 22px; border-radius: 19px; background-position: 58% center; }
+  .welcome-section h2 { font-size: 32px; }
+  .visual-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .visual-tile-wide { grid-column: 1 / -1; }
+  .visual-tile { min-height: 125px; }
+  .workspace-card { padding: 17px; border-radius: 16px; }
+}
+@media (max-width: 480px) {
+  .visual-strip { grid-template-columns: 1fr; }
+  .visual-tile-wide { grid-column: auto; }
+  .visual-tile { min-height: 135px; }
+  .hero-pills { gap: 6px; }
+  .hero-pills span { font-size: 9px; }
+  .topbar h1 { font-size: 22px; }
+}
+
+
+/* ==========================================================
+   TERRASPECTRA PREMIUM DARK REDESIGN · PAGE-WISE WORKSPACE
+   Existing Day 5–11 component classes are retained.
+========================================================== */
+:root { --ts-bg:#08130f; --ts-panel:#101f19; --ts-panel-2:#14271f; --ts-border:rgba(171,207,181,.14); --ts-text:#e8f2eb; --ts-muted:#9bb0a2; --ts-green:#9bd6a7; --ts-accent:#5fc58a; --ts-shadow:0 18px 45px rgba(0,0,0,.22); }
+html, body, #root { min-height:100%; background:#08130f; }
+body { color:var(--ts-text); background:radial-gradient(ellipse at 75% 0%,rgba(40,105,68,.16),transparent 38%),#08130f; }
+.app-layout { min-height:100vh; background:transparent; }
+.sidebar { position:sticky; top:0; align-self:flex-start; height:100vh; width:264px; min-width:264px; padding:28px 18px; background:linear-gradient(180deg,rgba(8,29,21,.98),rgba(11,38,27,.98)),url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=80") center/cover; border-right:1px solid var(--ts-border); box-shadow:12px 0 40px rgba(0,0,0,.18); }
+.sidebar::after { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(180deg,rgba(5,22,16,.82),rgba(5,25,17,.97)); }
+.brand { margin-bottom:48px; }
+.brand-icon { color:#092116; background:linear-gradient(145deg,#d8f4d9,#7fc992); box-shadow:0 8px 24px rgba(107,195,128,.2); }
+.brand h2 { color:#f1faf2; }
+.brand span,.nav-label,.sidebar-footer { color:#9bb6a4; }
+.nav-item { min-height:47px; color:#bdcfc2; border:1px solid transparent; transition:all .2s ease; }
+.nav-item:hover { transform:translateX(3px); background:rgba(255,255,255,.07); color:#fff; }
+.nav-item.active { color:#f4fff5; background:linear-gradient(100deg,rgba(99,190,125,.22),rgba(99,190,125,.07)); border-color:rgba(156,220,169,.2); box-shadow:inset 3px 0 #86d49a; }
+.nav-dot { background:#83d69a; box-shadow:0 0 0 4px rgba(131,214,154,.12); }
+.sidebar-footer { border-top:1px solid var(--ts-border); }
+.main-content { min-width:0; max-width:1800px; padding:27px clamp(18px,3.2vw,52px) 40px; }
+.topbar { border-bottom:1px solid var(--ts-border); padding-bottom:18px; }
+.breadcrumb { color:#829b8c; }
+.topbar h1 { color:#eff8f0; font-size:clamp(23px,2vw,30px); letter-spacing:-.7px; }
+.profile { color:#c8ddcd; background:#13271e; border:1px solid var(--ts-border); }
+.workspace-card,.day11-disease-section { color:var(--ts-text); background:linear-gradient(145deg,rgba(18,36,27,.98),rgba(13,28,21,.98)) !important; border:1px solid var(--ts-border) !important; box-shadow:var(--ts-shadow); }
+.workspace-card::before { opacity:.07; }
+.card-heading h3,.summary-heading h3,.day9-chart-card h4,.day9-existing-summary h4,.day10-chart-card h4,.day11-detail-card h5 { color:#e4f1e7 !important; }
+.section-tag { color:#91d5a1 !important; }
+.prototype-tag { color:#b7e9c0 !important; background:rgba(73,146,91,.17) !important; border:1px solid rgba(121,194,137,.22) !important; }
+.welcome-section { min-height:310px; margin:27px 0 20px; padding:clamp(28px,4vw,54px); border:1px solid rgba(255,255,255,.16); border-radius:24px; background:linear-gradient(90deg,rgba(3,24,15,.94),rgba(7,43,25,.76) 56%,rgba(5,32,20,.24)),url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=90") center 48%/cover; box-shadow:0 24px 55px rgba(0,0,0,.24); }
+.welcome-section .eyebrow { color:#c4ebc9; letter-spacing:2.2px; }
+.welcome-section h2 { max-width:680px; color:#fff; font-size:clamp(31px,4vw,49px); line-height:1.08; letter-spacing:-1.5px; }
+.welcome-section p:last-child { color:rgba(245,255,246,.8); line-height:1.8; }
+.hero-pills span { color:#effaf0; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); backdrop-filter:blur(8px); }
+.hero-side-note { color:#fff; background:rgba(7,31,19,.53); border:1px solid rgba(255,255,255,.23); backdrop-filter:blur(13px); }
+.hero-side-kicker { color:#bfe9c5; }
+.visual-strip { display:grid; grid-template-columns:1.35fr 1fr 1fr; gap:14px; margin:0 0 29px; }
+.visual-tile { position:relative; isolation:isolate; min-height:145px; overflow:hidden; border-radius:16px; background:#173d28; box-shadow:0 12px 28px rgba(0,0,0,.2); }
+.visual-tile::after { content:""; position:absolute; z-index:0; inset:0; background:linear-gradient(0deg,rgba(3,20,12,.88),rgba(3,20,12,.02) 80%); }
+.visual-tile img { position:absolute; z-index:-1; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .55s ease; }
+.visual-tile:hover img { transform:scale(1.06); }
+.visual-tile div { position:absolute; z-index:1; left:17px; right:14px; bottom:15px; display:flex; flex-direction:column; gap:5px; color:#fff; }
+.visual-tile span { color:#c5edca; font-size:8px; font-weight:800; letter-spacing:1.5px; }
+.summary-heading { margin-bottom:15px; }
+.summary-heading h3 { color:#e6f3e8; }
+.summary-card { min-height:165px; color:#eaf5ec; background:linear-gradient(145deg,#172b20,#102219); border:1px solid var(--ts-border); border-radius:17px; box-shadow:0 9px 24px rgba(0,0,0,.15); }
+.summary-card h2 { color:#f0faf1; }
+.summary-title,.summary-description { color:#a8bdad; }
+.summary-card:hover { transform:translateY(-4px); box-shadow:0 17px 35px rgba(0,0,0,.24); }
+.overview-shortcuts { display:flex; justify-content:space-between; align-items:center; gap:22px; margin:22px 0 26px; padding:25px; border:1px solid var(--ts-border); border-radius:18px; background:linear-gradient(110deg,rgba(20,48,32,.96),rgba(14,31,23,.96)),url("https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=1200&q=75") center/cover; }
+.overview-shortcuts h3 { margin:8px 0; color:#eff8f0; font-size:20px; }
+.overview-shortcuts p { margin:0; color:#a8bdad; font-size:13px; }
+.shortcut-actions { display:flex; flex-wrap:wrap; gap:9px; }
+.shortcut-actions button,.report-export-button { padding:11px 15px; color:#eaffed; background:#286b43; border:1px solid rgba(151,220,163,.24); border-radius:9px; font-size:12px; font-weight:700; cursor:pointer; transition:.2s ease; }
+.shortcut-actions button:hover,.report-export-button:hover { background:#348451; transform:translateY(-2px); }
+.page-intro { position:relative; isolation:isolate; overflow:hidden; min-height:190px; margin:25px 0 22px; padding:30px clamp(22px,3vw,38px); border:1px solid rgba(255,255,255,.12); border-radius:19px; background-position:center; background-size:cover; box-shadow:0 18px 40px rgba(0,0,0,.22); }
+.page-intro::before { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(4,24,15,.94),rgba(7,39,23,.74),rgba(7,39,23,.3)); }
+.page-intro h2 { margin:10px 0 8px; color:#f4fff5; font-size:clamp(26px,3vw,36px); letter-spacing:-.8px; }
+.page-intro p { max-width:680px; margin:0; color:rgba(235,248,237,.8); font-size:13px; line-height:1.7; }
+.monitoring-intro { background-image:url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1600&q=85"); }
+.analytics-intro { background-image:url("https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=1600&q=85"); }
+.disease-intro { background-image:url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=85"); }
+.reports-intro { background-image:url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=85"); }
+.day9-chart-card,.day10-chart-card,.day11-detail-card { color:#dcebe0; background:#172a20 !important; border:1px solid var(--ts-border) !important; border-radius:15px !important; box-shadow:0 8px 22px rgba(0,0,0,.14) !important; }
+.day9-chart-subtitle,.day10-chart-subtitle,.day11-disease-intro,.day11-detail-card li { color:#a8bcad !important; }
+.day9-existing-summary { border-color:var(--ts-border) !important; }
+.day9-donut::before { background:#172a20 !important; }
+.day9-donut-center strong,.day9-legend-item strong,.day9-bar-heading strong { color:#f0faf1 !important; }
+.day9-legend-item,.day9-bar-heading { color:#b5c9ba !important; }
+.day9-bar-track,.health-track { background:#293d30 !important; }
+.health-label { color:#c0d3c5 !important; }
+.sample-note,.day10-sample-note,.day11-sample-note,.sample-data-warning { color:#e8c98e !important; }
+.day10-filter-panel { background:#12251b !important; border:1px solid var(--ts-border) !important; }
+.day10-filter-heading strong,.day10-filter-controls label span { color:#dcebe0 !important; }
+.day10-filter-heading span,.day10-result-count { color:#91a99a !important; }
+.day10-filter-controls select,.day11-disease-selector select { color:#e2eee5 !important; background:#1a3024 !important; border:1px solid rgba(171,207,181,.2) !important; }
+.day11-disease-selector label { color:#c8dbcd !important; }
+.day11-disease-overview { background:linear-gradient(90deg,rgba(5,35,20,.94),rgba(13,68,37,.77)),url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1400&q=85") center/cover !important; }
+.day11-meta-item { background:#1a3024 !important; border:1px solid var(--ts-border) !important; }
+.day11-meta-item span { color:#9eb6a5 !important; }
+.day11-meta-item strong { color:#ecf7ee !important; }
+.day11-detail-card h5 { color:#e5f3e8 !important; }
+.day11-detail-card ul { color:#a9bdad !important; }
+.reports-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:0 0 22px; }
+.report-stat { display:flex; flex-direction:column; gap:8px; min-height:135px; padding:20px; background:linear-gradient(145deg,#172d21,#102219); border:1px solid var(--ts-border); border-radius:15px; }
+.report-stat span { color:#91c99d; font-size:9px; font-weight:800; letter-spacing:1.4px; }
+.report-stat strong { color:#f2fbf3; font-size:30px; }
+.report-stat small { color:#9eb4a4; font-size:11px; }
+.report-export-card p { color:#a8bdad; font-size:13px; line-height:1.7; }
+.report-disclaimer { margin-top:18px; padding:12px; background:rgba(205,155,65,.08); border:1px solid rgba(205,155,65,.18); border-radius:9px; color:#e7c98f !important; }
+.empty-workspace { color:#fff; background:linear-gradient(90deg,rgba(5,32,19,.9),rgba(8,46,26,.58)),url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1500&q=85") center/cover; }
+footer { color:#789181; text-align:center; }
+/* FarmMap overlay and dark control styling */
+.farm-map-widget { margin-top:12px; }
+.farm-map-container { position:relative; width:100%; height:520px; overflow:hidden; border:1px solid rgba(161,204,173,.2) !important; border-radius:16px; background:#101a16; box-shadow:0 12px 32px rgba(0,0,0,.25) !important; }
+.farm-map-container .maplibregl-map { position:absolute; inset:0; }
+.map-layer-panel { display:flex; flex-wrap:wrap; align-items:center; gap:14px; padding:14px 16px; margin-bottom:12px; background:#13271d !important; border:1px solid var(--ts-border) !important; border-radius:12px; }
+.map-panel-heading strong,.map-layer-option { color:#dcebe0 !important; }
+.map-panel-heading span { color:#91a99a !important; }
+.map-panel-divider { background:var(--ts-border) !important; }
+.map-layer-option input { accent-color:#78cf8c; }
+.day8-map-legend span { color:#b6cabb !important; }
+.map-controls button { color:#eaf7ed !important; background:#193326 !important; border:1px solid rgba(180,220,188,.22) !important; box-shadow:0 4px 15px rgba(0,0,0,.3) !important; }
+.map-controls button:hover { background:#28543a !important; }
+.map-coordinates { color:#d8ebdc !important; background:rgba(8,25,17,.88) !important; border:1px solid rgba(180,220,188,.18); backdrop-filter:blur(8px); }
+.heatmap-label { color:#ffe1a5 !important; background:rgba(70,47,16,.9) !important; border-color:rgba(236,183,86,.4) !important; }
+.farm-info-panel { color:#e7f2e9 !important; background:rgba(15,34,24,.96) !important; border:1px solid rgba(171,207,181,.2) !important; box-shadow:0 12px 32px rgba(0,0,0,.35) !important; backdrop-filter:blur(12px); }
+.farm-info-panel h4,.farm-info-panel p strong { color:#eef8f0 !important; }
+.farm-info-panel p { color:#aec2b3 !important; }
+.farm-info-close { color:#e7f2e9 !important; background:#294334 !important; }
+.farm-info-note { border-color:var(--ts-border) !important; }
+.sample-data-warning { background:rgba(90,62,19,.2) !important; border:1px solid rgba(211,169,91,.22) !important; }
+@media (max-width:1100px) { .reports-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .overview-shortcuts { align-items:flex-start; flex-direction:column; } }
+@media (max-width:900px) { .sidebar { width:220px; min-width:220px; } .day9-chart-grid,.day10-chart-grid { grid-template-columns:1fr; } }
+@media (max-width:700px) { .app-layout { display:block; } .sidebar { position:relative; display:block; width:100%; min-width:0; height:auto; padding:13px 14px; } .brand { margin:0 0 12px; } .brand h2 { font-size:16px; } .nav-label,.sidebar-footer { display:none; } .sidebar nav { display:flex; gap:7px; overflow-x:auto; padding-bottom:2px; } .nav-item,.nav-item:not(.active) { display:flex; flex:0 0 auto; width:auto; min-height:39px; padding:9px 11px; font-size:11px; } .nav-dot { width:6px; height:6px; } .main-content { padding:17px 13px 28px; } .welcome-section { min-height:280px; margin-top:18px; padding:25px 20px; background-position:58% center; } .welcome-section h2 { font-size:32px; } .visual-strip { grid-template-columns:1fr 1fr; gap:10px; } .visual-tile-wide { grid-column:1/-1; } .visual-tile { min-height:125px; } .farm-map-container { height:440px; } .reports-grid { grid-template-columns:1fr 1fr; } .page-intro { min-height:170px; padding:24px 19px; } }
+@media (max-width:480px) { .visual-strip { grid-template-columns:1fr; } .visual-tile-wide { grid-column:auto; } .reports-grid { grid-template-columns:1fr 1fr; gap:9px; } .report-stat { min-height:120px; padding:14px; } .report-stat strong { font-size:25px; } .farm-map-container { height:420px; } .farm-info-panel { width:170px !important; padding:10px !important; } .map-controls { top:10px; right:10px; } .map-controls button { width:34px !important; height:34px !important; } }
+
